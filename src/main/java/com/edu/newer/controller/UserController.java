@@ -58,7 +58,7 @@ public class UserController {
         DecodedJWT verify = JWTUtils.verify(token);
         String name = verify.getClaim("name").asString();
         String id = verify.getClaim("userId").asString();
-        System.out.println("id:"+id);
+        System.out.println("userId:"+id);
         System.out.println("name:"+name);
         map.put("state",true);
             map.put("msg","请求成功");
