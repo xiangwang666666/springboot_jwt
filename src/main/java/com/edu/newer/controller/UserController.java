@@ -38,7 +38,6 @@ public class UserController {
             //生成JWT令牌
             Map<String, String> payload=new HashMap<>();
             payload.put("userId",userDB.getId());
-
             payload.put("name",userDB.getName());
             String token = JWTUtils.getToken(payload);
             map.put("state", true);
@@ -54,12 +53,13 @@ public class UserController {
     public  Map<String, Object> test(HttpServletRequest request){
         Map<String, Object> map=new HashMap<>();
         //处理自己的业务
-        String token = request.getHeader("token");
+        String token = request.getHeader("token");//获得请求头中的token
         DecodedJWT verify = JWTUtils.verify(token);
         String name = verify.getClaim("name").asString();
         String id = verify.getClaim("userId").asString();
-        System.out.println("userId:"+id);
-        System.out.println("name:"+name);
+        log.info("userId:[{}]",id);
+        log.info("name:[{}]",name);
+
         map.put("state",true);
             map.put("msg","请求成功");
             return map;
